@@ -1,0 +1,25 @@
+<div>
+ Posts
+  <form #form="ngForm" (ngSubmit)="addImage(form)">
+    <div>
+      <label>Title</label>
+      <input name="title" ngModel/>
+    </div>
+    <div>
+      <label>Image</label>
+      <input type="file" name="url" ngModel msctFileUploader/>
+    </div>
+    <button type="submit">Add</button>
+  </form>
+</div>
+<table>
+  <thead>
+    <th colspan=2>Posts</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let image of images">
+      <td>{{ image.title }}</td>
+      <td><img [src]="image.url" height="200" *ngIf="image.url"></td>
+    </tr>
+  </tbody>
+</table>
