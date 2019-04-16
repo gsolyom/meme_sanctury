@@ -1,0 +1,25 @@
+<div class="msct-container">
+  <div class="posts-toolbar">
+    <form #form="ngForm" (ngSubmit)="addImage(form)">
+      <mat-form-field class="fill-width">
+        <input matInput name="title" placeholder="Title" ngModel/>
+      </mat-form-field>
+
+      <input #fileInput type="file" name="url" ngModel msctFileUploader class="hidden-input"/>
+      <button type="button" mat-icon-button (click)="fileInput.click()">
+        <mat-icon>add_photo_alternate</mat-icon>
+      </button>
+
+      <button mat-button type="submit">
+          Send
+      </button>
+    </form>
+  </div>
+  <h3>Posts</h3>
+  <mat-card *ngFor="let image of images" class="image-card">
+    <mat-card-title>
+      {{ image.title }}
+    </mat-card-title>
+    <img mat-card-image [src]="image.url" height="200" *ngIf="image.url"/>
+  </mat-card>
+</div>

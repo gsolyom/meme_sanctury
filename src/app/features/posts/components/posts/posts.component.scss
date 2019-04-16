@@ -1,0 +1,36 @@
+
+:host {
+	margin-top: 16px;
+	display: block;
+}
+
+.hidden-input {
+	display: none;
+}
+
+.image-card {
+	margin-bottom: 16px;
+	max-width: calc(66% - 16px);
+
+	img {
+		height: 500px;
+	}
+}
+
+.posts-toolbar {
+	padding: 0;
+
+	.fill-width {
+		width: 100%;
+	}
+
+	form {
+		display: flex;
+		flex: 1;
+		align-items: center;
+
+		& > *:not(:last-child) {
+			margin-right: 8px;
+		}
+	}
+}
