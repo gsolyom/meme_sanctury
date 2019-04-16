@@ -62,7 +62,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "meme-sanctuary:build"
+            "browserTarget": "meme-sanctuary:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
