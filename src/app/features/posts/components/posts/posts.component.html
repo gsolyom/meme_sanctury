@@ -16,10 +16,8 @@
     </form>
   </div>
   <h3>Posts</h3>
-  <mat-card *ngFor="let post of posts | async" class="post-card">
-    <mat-card-title>
-      {{ post.title }}
-    </mat-card-title>
-    <img mat-card-image [src]="post.url" height="200" *ngIf="post.url"/>
-  </mat-card>
+  <msct-post-card *ngFor="let post of posts | async"
+  [title]="post.title"
+  [url]="post.url">
+  </msct-post-card>
 </div>
