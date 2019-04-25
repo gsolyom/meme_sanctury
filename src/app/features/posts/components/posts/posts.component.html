@@ -2,24 +2,20 @@
   <div class="posts-toolbar">
     <form #form="ngForm" (ngSubmit)="addPosts(form)">
       <mat-form-field class="fill-width">
-        <input matInput name="title" placeholder="Title" ngModel/>
+        <input matInput name="title" placeholder="Title" ngModel />
       </mat-form-field>
 
-      <input #fileInput type="file" name="url" ngModel msctFileUploader class="hidden-input"/>
+      <input #fileInput type="file" name="url" ngModel msctFileUploader class="hidden-input" />
       <button type="button" mat-icon-button (click)="fileInput.click()">
         <mat-icon>add_photo_alternate</mat-icon>
       </button>
 
       <button mat-button type="submit">
-          Send
+        Send
       </button>
     </form>
   </div>
   <h3>Posts</h3>
-  <mat-card *ngFor="let post of posts | async" class="post-card">
-    <mat-card-title>
-      {{ post.title }}
-    </mat-card-title>
-    <img mat-card-image [src]="post.url" height="200" *ngIf="post.url"/>
-  </mat-card>
+  <msct-post-card *ngFor="let post of posts | async" [title]="post.title" [url]="post.url">
+  </msct-post-card>
 </div>
