@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { PostsComponent } from './components/posts/posts.component';
-import { CreatePostComponent } from './components/create-post/create-post.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 const routes: Routes = [
-  { path: 'new', component: CreatePostComponent },
+  { path: 'new', component: NewPostComponent },
   { path: '', component: PostsComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PostsRoutingModule { }
+export class PostsRoutingModule {}

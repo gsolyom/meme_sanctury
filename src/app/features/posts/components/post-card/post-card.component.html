@@ -2,5 +2,11 @@
   <mat-card-title>
     {{ title }}
   </mat-card-title>
-  <img mat-card-image [src]="url" height="200" *ngIf="url"/>
+  <img
+    mat-card-image
+    [src]="url"
+    height="200"
+    *ngIf="url"
+    [@Grow]="this.animationState"
+  />
 </mat-card>

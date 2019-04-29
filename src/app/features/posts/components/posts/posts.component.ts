@@ -1,6 +1,5 @@
 import { Component, EventEmitter, AfterViewInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { switchMap, debounceTime, map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 import { PostService } from '../../services/post.service';
 
@@ -16,7 +15,7 @@ export class PostsComponent implements AfterViewInit {
     .asObservable()
     .pipe(switchMap(() => this.postService.getAll()));
 
-  constructor(private readonly postService: PostService) { }
+  constructor(private readonly postService: PostService) {}
 
   ngAfterViewInit() {
     this.fetchPosts.emit();

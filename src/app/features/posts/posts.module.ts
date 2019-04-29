@@ -5,16 +5,11 @@ import { PostsComponent } from './components/posts/posts.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PostService } from './services/post.service';
 import { PostCardComponent } from './components/post-card/post-card.component';
-import { CreatePostComponent } from './components/create-post/create-post.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 @NgModule({
-  declarations: [PostsComponent, PostCardComponent, CreatePostComponent],
-  imports: [
-    SharedModule,
-    PostsRoutingModule
-  ],
-  providers: [
-    PostService
-  ]
+  declarations: [PostsComponent, PostCardComponent, NewPostComponent],
+  imports: [SharedModule, PostsRoutingModule],
+  providers: [PostService]
 })
-export class PostsModule { }
+export class PostsModule {}

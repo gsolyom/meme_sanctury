@@ -1,0 +1,47 @@
+<div class="msct-container">
+  <div class="posts-toolbar">
+    <form #form="ngForm" (ngSubmit)="addPost(form)">
+      <mat-form-field class="fill-width">
+        <input
+          matInput
+          name="title"
+          placeholder="Title"
+          [ngModel]="'untitled'"
+          autofocus
+          (focus)="$event.target.select()"
+        />
+      </mat-form-field>
+
+      <input
+        #fileInput
+        type="file"
+        name="url"
+        ngModel
+        msctFileUploader
+        class="hidden-input"
+      />
+      <button
+        type="button"
+        mat-icon-button
+        (click)="fileInput.click()"
+        (focus)="fileInput.click(); submitButton.focus()"
+      >
+        <mat-icon>add_photo_alternate</mat-icon>
+      </button>
+
+      <button #submitButton mat-button type="submit">
+        Send
+      </button>
+    </form>
+    <msct-post-card
+      *ngIf="form.value as post"
+      [title]="post.title"
+      [url]="post.url"
+      [animate]="true"
+    >
+    </msct-post-card>
+  </div>
+  <button mat-button type="button" [routerLink]="['/posts']">
+    Back to posts
+  </button>
+</div>
