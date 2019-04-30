@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  AfterViewInit,
-  ViewChild,
-  ElementRef,
-  AfterViewChecked
-} from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, switchMap, map } from 'rxjs/operators';

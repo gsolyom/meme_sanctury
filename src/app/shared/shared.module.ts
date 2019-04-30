@@ -6,7 +6,9 @@ import {
   MatInputModule,
   MatIconModule,
   MatCardModule,
-  MatToolbarModule } from '@angular/material';
+  MatToolbarModule,
+  MatDividerModule
+} from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 import { FileUploaderDirective } from '../shared/components/file-uploader/file-uploader.component';
@@ -19,6 +21,7 @@ const MODULES = [
   MatIconModule,
   MatCardModule,
   MatToolbarModule,
+  MatDividerModule,
   FormsModule
 ];
 
@@ -27,4 +30,4 @@ const MODULES = [
   imports: MODULES,
   exports: [...MODULES, FileUploaderDirective]
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -39,6 +39,7 @@ import {
 export class PostCardComponent implements OnInit {
   @Input() title: any;
   @Input() url: any;
+  @Input() id: any;
   @Input() animate: boolean;
 
   animationState: string;

@@ -1,0 +1,39 @@
+<div *ngIf="post | async as post; else loading">
+  <div class="msct-container" *ngIf="!showFullSizeImage" [@Fade]="'fadeIn'">
+    <div class="post-view">
+      <h2 class="title">
+        {{ post.title }}
+      </h2>
+      <mat-divider></mat-divider>
+      <img [src]="post.url" *ngIf="post.url" (click)="toggleFullSizeImage()" />
+    </div>
+    <button mat-button type="button" [routerLink]="['/posts']">
+      Back to posts
+    </button>
+  </div>
+  <div
+    class="full-size-image"
+    *ngIf="showFullSizeImage"
+    (click)="toggleFullSizeImage()"
+    [@Fade]="'fadeIn'"
+  >
+    <div class="image-container">
+      <img [src]="post.url" *ngIf="post.url" />
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="msct-container" [@Fade]="'fadeIn'">
+    <div class="post-view">
+      <h2 class="title">
+        title
+      </h2>
+      <mat-divider></mat-divider>
+      <img mat-card-image src="assets/images/placeholder_meme.jpg" />
+    </div>
+    <button mat-button type="button" [routerLink]="['/posts']">
+      Back to posts
+    </button>
+  </div>
+</ng-template>
