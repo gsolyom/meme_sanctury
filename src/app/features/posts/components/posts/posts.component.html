@@ -1,21 +1,16 @@
 <div class="msct-container">
-  <div class="posts-toolbar">
-    <form #form="ngForm" (ngSubmit)="addPosts(form)">
-      <mat-form-field class="fill-width">
-        <input matInput name="title" placeholder="Title" ngModel />
-      </mat-form-field>
-
-      <input #fileInput type="file" name="url" ngModel msctFileUploader class="hidden-input" />
-      <button type="button" mat-icon-button (click)="fileInput.click()">
-        <mat-icon>add_photo_alternate</mat-icon>
-      </button>
-
-      <button mat-button type="submit">
-        Send
-      </button>
-    </form>
-  </div>
-  <h3>Posts</h3>
-  <msct-post-card *ngFor="let post of posts | async" [title]="post.title" [url]="post.url">
+  <mat-toolbar>
+    <h3>Posts</h3>
+    <span class="msct-flex-fill"></span>
+    <button mat-fab type="button" [routerLink]="['new']">
+      <mat-icon aria-label="Add your own post">add</mat-icon>
+    </button>
+  </mat-toolbar>
+  <msct-post-card
+    *ngFor="let post of (posts | async)"
+    [title]="post.title"
+    [url]="post.url"
+    [animate]="false"
+  >
   </msct-post-card>
 </div>

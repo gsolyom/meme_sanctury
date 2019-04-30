@@ -1,0 +1,26 @@
+:host {
+  margin-top: 16px;
+  display: block;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.posts-toolbar {
+  padding: 0;
+
+  .fill-width {
+    width: 100%;
+  }
+
+  form {
+    display: flex;
+    flex: 1;
+    align-items: center;
+
+    & > *:not(:last-child) {
+      margin-right: 8px;
+    }
+  }
+}
