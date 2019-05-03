@@ -1,4 +1,4 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
@@ -35,10 +35,10 @@ import {
   ]
 })
 export class ViewPostComponent {
-  fetchPost = new EventEmitter<any>();
   post = this.route.params.pipe(
     switchMap(({ postId }) => this.postService.getById(postId))
   );
+
   showFullSizeImage = false;
 
   constructor(
@@ -48,5 +48,10 @@ export class ViewPostComponent {
 
   toggleFullSizeImage(): void {
     this.showFullSizeImage = !this.showFullSizeImage;
+  }
+
+  adjustImageSize(image: ElementRef): void {
+    if (image.nativeElement.offsetHeight > 800) {
+    }
   }
 }

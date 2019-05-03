@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./post-card.component.scss']
 })
 export class PostCardComponent {
+  @Input() postId: number;
   @Input() title: any;
   @Input() url: any;
-  @Input() id: any;
 }

@@ -4,9 +4,18 @@
       <h2 class="title">
         {{ post.title }}
       </h2>
-      <mat-divider></mat-divider>
-      <img [src]="post.url" *ngIf="post.url" (click)="toggleFullSizeImage()" />
+      <img
+        #overflowClass="msctOverflowClass"
+        *ngIf="post.url"
+        (click)="toggleFullSizeImage()"
+        (load)="overflowClass.refresh()"
+        [src]="post.url"
+        msctOverflowClass="strech-height"
+        overflow="height"
+        threshold="800"
+      />
     </div>
+    <msct-comments [postId]="post.id"></msct-comments>
     <button mat-button type="button" [routerLink]="['/posts']">
       Back to posts
     </button>
@@ -18,7 +27,7 @@
     [@Fade]="'fadeIn'"
   >
     <div class="image-container">
-      <img [src]="post.url" *ngIf="post.url" />
+      <img #postImage *ngIf="post.url" [src]="post.url" />
     </div>
   </div>
 </div>
@@ -29,7 +38,6 @@
       <h2 class="title">
         title
       </h2>
-      <mat-divider></mat-divider>
       <img mat-card-image src="assets/images/placeholder_meme.jpg" />
     </div>
     <button mat-button type="button" [routerLink]="['/posts']">

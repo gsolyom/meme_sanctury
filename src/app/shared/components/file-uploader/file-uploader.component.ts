@@ -1,16 +1,24 @@
-import { Component, EventEmitter, OnDestroy, forwardRef, Directive, HostListener, HostBinding } from '@angular/core';
+import {
+  EventEmitter,
+  OnDestroy,
+  forwardRef,
+  Directive,
+  HostListener,
+  HostBinding
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { error } from '@angular/compiler/src/util';
 
 @Directive({
   selector: 'input[type=file][msctFileUploader]',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FileUploaderDirective),
-    multi: true
-   }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => FileUploaderDirective),
+      multi: true
+    }
+  ]
 })
-export class FileUploaderDirective implements OnDestroy, ControlValueAccessor  {
+export class FileUploaderDirective implements OnDestroy, ControlValueAccessor {
   @HostBinding('attr.disabled')
   disabled = undefined;
   onChangeEmitter = new EventEmitter();
@@ -20,7 +28,7 @@ export class FileUploaderDirective implements OnDestroy, ControlValueAccessor  {
   onChange(event: any): void {
     const reader = new FileReader();
 
-    reader.onload = (_) => {
+    reader.onload = _ => {
       this.onChangeEmitter.emit(reader.result);
     };
 

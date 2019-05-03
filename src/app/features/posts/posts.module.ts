@@ -7,15 +7,20 @@ import { PostService } from './services/post.service';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
 import { ViewPostComponent } from './components/view-post/view-post.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { CommentsPreviewComponent } from './components/comments-preview/comments-preview.component';
+import { CommentService } from './services/comment.service';
 
 @NgModule({
   declarations: [
     PostsComponent,
     PostCardComponent,
     NewPostComponent,
-    ViewPostComponent
+    ViewPostComponent,
+    CommentsComponent,
+    CommentsPreviewComponent
   ],
   imports: [SharedModule, PostsRoutingModule],
-  providers: [PostService]
+  providers: [PostService, CommentService]
 })
 export class PostsModule {}

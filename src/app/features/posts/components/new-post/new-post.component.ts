@@ -50,6 +50,8 @@ export class NewPostComponent {
         debounceTime(500),
         map(form => {
           form.value.date = new Date();
+          form.value.nsfw = false;
+          form.value.ownerId = 1;
           return form;
         }),
         switchMap(form =>

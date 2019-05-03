@@ -1,0 +1,33 @@
+<div class="comment-list-container">
+  <form #form="ngForm" (ngSubmit)="addComment(form)" class="new-comment-form">
+    <mat-form-field class="fill-width">
+      <textarea
+        #commentText
+        name="text"
+        placeholder="Add a comment"
+        matInput
+        matTextareaAutosize
+        matAutosizeMinRows="3"
+        matAutosizeMaxRows="3"
+        ngModel
+      ></textarea>
+    </mat-form-field>
+    <button mat-button type="submit">
+      Send
+    </button>
+  </form>
+  <ng-container *ngIf="comments | async as commentArray">
+    <div *ngFor="let comment of commentArray" class="comment-container">
+      <b>User_{{ comment.userId }}</b>
+      <div>
+        {{ comment.text }}
+      </div>
+    </div>
+
+    <div *ngIf="commentArray.length < 1" class="comment-container">
+      <p>
+        No comments were added yet...
+      </p>
+    </div>
+  </ng-container>
+</div>

@@ -1,9 +1,23 @@
 .post-card {
-  margin-bottom: 16px;
-  max-width: calc(66% - 16px);
+  margin-right: 16px;
+  flex: 2;
 
   img {
-    height: 500px;
     object-fit: cover;
+    height: 500px;
   }
+}
+
+.post-container {
+  display: flex;
+  margin-bottom: 16px;
+  height: 560px;
+}
+
+.preview-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  max-height: fit-content;
+  border-radius: 4px;
 }

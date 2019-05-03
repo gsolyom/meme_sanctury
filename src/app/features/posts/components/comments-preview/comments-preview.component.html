@@ -1,0 +1,12 @@
+<div
+  *ngIf="comments | async as comments"
+  msctOverflowClass="comment-preview-list"
+  overflow="height"
+  threshold="560"
+>
+  <mat-card *ngFor="let comment of comments" class="comment-preview">
+    <mat-card-content>
+      {{ comment.text }}
+    </mat-card-content>
+  </mat-card>
+</div>
