@@ -1,12 +1,6 @@
 <mat-card class="post-card">
   <mat-card-title>
-    {{ this.title }}
+    {{ title }}
   </mat-card-title>
-  <img
-    mat-card-image
-    [src]="this.url"
-    *ngIf="this.url"
-    [@Grow]="this.animationState"
-    [routerLink]="['/posts', this.id]"
-  />
+  <img mat-card-image *ngIf="url" [src]="url" [routerLink]="['/posts', id]" />
 </mat-card>
