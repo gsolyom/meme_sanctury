@@ -7,10 +7,10 @@
     </button>
   </mat-toolbar>
   <msct-post-card
-    *ngFor="let post of (posts | async)"
+    *ngFor="let post of posts | async"
     [title]="post.title"
     [url]="post.url"
-    [animate]="false"
+    [id]="post.id"
   >
   </msct-post-card>
 </div>

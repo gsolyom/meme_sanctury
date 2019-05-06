@@ -4,11 +4,11 @@
       <mat-form-field class="fill-width">
         <input
           matInput
+          autofocus
           name="title"
           placeholder="Title"
-          [ngModel]="'untitled'"
-          autofocus
           (focus)="$event.target.select()"
+          [ngModel]="'untitled'"
         />
       </mat-form-field>
 
@@ -33,13 +33,18 @@
         Send
       </button>
     </form>
-    <msct-post-card
-      *ngIf="form.value as post"
-      [title]="post.title"
-      [url]="post.url"
-      [animate]="true"
-    >
-    </msct-post-card>
+    <mat-card *ngIf="form.value as post" class="post-card">
+      <mat-card-title>
+        {{ post.title }}
+      </mat-card-title>
+      <img
+        mat-card-image
+        *ngIf="post.url"
+        (load)="animationState = 'appear'"
+        [src]="post.url"
+        [@FadeIn]="animationState"
+      />
+    </mat-card>
   </div>
   <button mat-button type="button" [routerLink]="['/posts']">
     Back to posts

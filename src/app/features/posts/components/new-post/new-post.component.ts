@@ -1,25 +1,44 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  AfterViewInit,
-  ViewChild,
-  ElementRef,
-  AfterViewChecked
-} from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, switchMap, map } from 'rxjs/operators';
 
 import { PostService } from '../../services/post.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'msct-new-post',
   templateUrl: './new-post.component.html',
-  styleUrls: ['./new-post.component.scss']
+  styleUrls: ['./new-post.component.scss'],
+  animations: [
+    trigger('FadeIn', [
+      state(
+        'appear',
+        style({
+          opacity: 1,
+          transform: 'translateY(0)'
+        })
+      ),
+      state(
+        'void',
+        style({
+          opacity: 0,
+          transform: 'translateY(-5%)'
+        })
+      ),
+      transition('void => appear', [animate('0.25s ease-in')])
+    ])
+  ]
 })
 export class NewPostComponent {
   addPostEmitter = new EventEmitter<any>();
+  animationState = 'void';
 
   constructor(
     private readonly postService: PostService,

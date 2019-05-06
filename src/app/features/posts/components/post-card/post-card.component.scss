@@ -1,8 +1,9 @@
 .post-card {
-	margin-bottom: 16px;
-	max-width: calc(66% - 16px);
+  margin-bottom: 16px;
+  max-width: calc(66% - 16px);
 
-	img {
-		height: 500px;
-	}
+  img {
+    height: 500px;
+    object-fit: cover;
+  }
 }

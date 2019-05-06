@@ -6,8 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PostService {
-
-  constructor( private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {}
 
   add(post: any): Observable<any> {
     return this.http.post('/api/posts', post);
@@ -15,5 +14,9 @@ export class PostService {
 
   getAll(): Observable<any> {
     return this.http.get('/api/posts');
+  }
+
+  getById(id: any): Observable<any> {
+    return this.http.get('/api/posts/' + id);
   }
 }

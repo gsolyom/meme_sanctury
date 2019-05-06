@@ -2,11 +2,5 @@
   <mat-card-title>
     {{ title }}
   </mat-card-title>
-  <img
-    mat-card-image
-    [src]="url"
-    height="200"
-    *ngIf="url"
-    [@Grow]="this.animationState"
-  />
+  <img mat-card-image *ngIf="url" [src]="url" [routerLink]="['/posts', id]" />
 </mat-card>
