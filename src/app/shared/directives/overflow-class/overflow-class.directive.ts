@@ -1,13 +1,11 @@
 import {
   Directive,
   Input,
-  HostBinding,
   ElementRef,
   OnDestroy,
   AfterViewInit
 } from '@angular/core';
 import { Subject, combineLatest } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Directive({
   selector: '[msctOverflowClass]',
@@ -19,7 +17,7 @@ export class OverflowClassDirective implements AfterViewInit, OnDestroy {
   private thresholdSubject = new Subject<number>();
   private viewInitSubject = new Subject<boolean>();
 
-  private ClassSubscription = combineLatest(
+  private classSubscription = combineLatest(
     this.msctOverflowClassSubject.asObservable(),
     this.overflowSubject.asObservable(),
     this.thresholdSubject.asObservable(),
@@ -37,10 +35,7 @@ export class OverflowClassDirective implements AfterViewInit, OnDestroy {
     }
   });
 
-  constructor(
-    private readonly elementRef: ElementRef,
-    private readonly sanitizer: DomSanitizer
-  ) {}
+  constructor(private readonly elementRef: ElementRef) {}
 
   @Input()
   set msctOverflowClass(val: string) {
@@ -62,7 +57,7 @@ export class OverflowClassDirective implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.ClassSubscription.unsubscribe();
+    this.classSubscription.unsubscribe();
     this.msctOverflowClassSubject.complete();
     this.overflowSubject.complete();
     this.thresholdSubject.complete();

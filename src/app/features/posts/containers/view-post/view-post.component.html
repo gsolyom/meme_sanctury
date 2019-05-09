@@ -1,0 +1,47 @@
+<div class="msct-container">
+  <button mat-button type="button" [routerLink]="['/posts']">
+    Back
+  </button>
+  <ng-container *ngIf="post | async as post; else loading">
+    <div *ngIf="!showFullSizeImage" [@Fade]="'fadeIn'">
+      <div class="post-view">
+        <h2 class="title">
+          {{ post.title }}
+        </h2>
+        <img
+          #overflowClass="msctOverflowClass"
+          *ngIf="post.url"
+          (click)="toggleFullSizeImage()"
+          (load)="overflowClass.refresh()"
+          [src]="post.url"
+          msctOverflowClass="strech-height"
+          overflow="height"
+          threshold="800"
+        />
+      </div>
+      <div *ngIf="comments | async as comments" class="comment-list-container">
+        <msct-new-comment
+          (newCommentSubmitted)="addComment($event)"
+        ></msct-new-comment>
+        <msct-comments [comments]="comments"></msct-comments>
+      </div>
+    </div>
+
+    <msct-full-size-image-display
+      *ngIf="showFullSizeImage"
+      (click)="toggleFullSizeImage()"
+      [imageUrl]="post.url"
+    ></msct-full-size-image-display>
+  </ng-container>
+
+  <ng-template #loading>
+    <div [@Fade]="'fadeIn'">
+      <div class="post-view">
+        <h2 class="title">
+          title
+        </h2>
+        <img mat-card-image src="assets/images/placeholder_meme.jpg" />
+      </div>
+    </div>
+  </ng-template>
+</div>

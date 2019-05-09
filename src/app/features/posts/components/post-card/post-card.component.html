@@ -1,16 +1,11 @@
-<div class="post-container">
-  <mat-card class="post-card">
-    <mat-card-title>
-      {{ title }}
-    </mat-card-title>
-    <img
-      mat-card-image
-      *ngIf="url"
-      [src]="url"
-      [routerLink]="['/posts', postId]"
-    />
-  </mat-card>
-
-  <msct-comments-preview [postId]="postId" class="preview-container">
-  </msct-comments-preview>
-</div>
+<mat-card>
+  <mat-card-title>
+    {{ title }}
+  </mat-card-title>
+  <img
+    mat-card-image
+    *ngIf="url"
+    [src]="url"
+    [routerLink]="['/posts', postId]"
+  />
+</mat-card>

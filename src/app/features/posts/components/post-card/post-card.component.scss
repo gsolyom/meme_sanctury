@@ -1,23 +1,12 @@
-.post-card {
-  margin-right: 16px;
-  flex: 2;
-
-  img {
-    object-fit: cover;
-    height: 500px;
-  }
-}
-
-.post-container {
+:host {
   display: flex;
-  margin-bottom: 16px;
-  height: 560px;
-}
 
-.preview-container {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-  max-height: fit-content;
-  border-radius: 4px;
+  mat-card {
+    flex: 1;
+
+    img {
+      object-fit: cover;
+      height: 500px;
+    }
+  }
 }

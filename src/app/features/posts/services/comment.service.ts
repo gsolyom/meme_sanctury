@@ -9,6 +9,11 @@ export class CommentService {
   constructor(private readonly http: HttpClient) {}
 
   add(comment: any): Observable<any> {
+    comment.date = new Date();
+
+    // TODO: remove this when the functionality gets implemented
+    comment.userId = 1;
+
     return this.http.post('/api/comments', comment);
   }
 
@@ -17,13 +22,7 @@ export class CommentService {
     pageNumber: number = null,
     pageLimit: number = 10
   ): Observable<any> {
-    const query =
-      '/api/posts/' +
-      postId +
-      '/comments' +
-      (pageNumber
-        ? '?_page=' + pageNumber + (pageLimit ? '&_limit=' + pageLimit : '')
-        : '');
+    const query = `/api/posts/${postId}/comments/${pageNumber},${pageLimit}`;
 
     return this.http.get(query);
   }

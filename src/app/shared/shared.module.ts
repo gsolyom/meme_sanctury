@@ -11,8 +11,8 @@ import {
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
-import { FileUploaderDirective } from '../shared/components/file-uploader/file-uploader.component';
-import { OverflowClassDirective } from './directives/overflow-class.directive';
+import { FileUploaderDirective } from './directives/file-uploader/file-uploader.directive';
+import { OverflowClassDirective } from './directives/overflow-class/overflow-class.directive';
 
 const MODULES = [
   CommonModule,

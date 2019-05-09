@@ -1,0 +1,21 @@
+<form #form="ngForm" (ngSubmit)="submit()" class="new-comment-form">
+  <mat-form-field class="fill-width" appearance="outline">
+    <mat-label>
+      Message
+    </mat-label>
+    <textarea
+      #commentText
+      (keydown.enter)="form.onSubmit()"
+      name="text"
+      placeholder="Add a comment"
+      matInput
+      matTextareaAutosize
+      matAutosizeMinRows="3"
+      matAutosizeMaxRows="3"
+      ngModel
+    ></textarea>
+    <mat-hint>
+      Press Shift+Enter for new line, Enter to send the comment
+    </mat-hint>
+  </mat-form-field>
+</form>

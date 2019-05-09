@@ -1,24 +1,4 @@
-.comment-list-container {
-  margin-bottom: 16px;
-  width: 100%;
-  padding: 8px;
-  background-color: rgba(255, 255, 255, 0.75);
-  color: rgba(0, 0, 0, 0.87);
-}
-
 .comment-container {
   margin-bottom: 16px;
   white-space: pre;
-}
-
-.new-comment-form {
-  display: flex;
-
-  mat-form-field {
-    flex: 10;
-  }
-
-  button {
-    flex: 1;
-  }
 }

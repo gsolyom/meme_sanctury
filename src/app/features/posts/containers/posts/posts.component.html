@@ -1,0 +1,23 @@
+<div class="msct-container">
+  <mat-toolbar>
+    <h3>Posts</h3>
+    <span class="msct-flex-fill"></span>
+    <button mat-fab type="button" [routerLink]="['new']">
+      <mat-icon aria-label="Add your own post">add</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div *ngFor="let post of posts | async" class="post-container">
+    <msct-post-card
+      [title]="post.title"
+      [url]="post.url"
+      [postId]="post.id"
+      class="post-card"
+    >
+    </msct-post-card>
+    <msct-comments-preview
+      [comments]="post.comments"
+      class="comment-preview-container"
+    >
+    </msct-comments-preview>
+  </div>
+</div>
