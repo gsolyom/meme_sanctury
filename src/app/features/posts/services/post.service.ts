@@ -9,6 +9,12 @@ export class PostService {
   constructor(private readonly http: HttpClient) {}
 
   add(post: any): Observable<any> {
+    post.date = new Date();
+
+    // TODO: remove this when the corresponding features are implemented
+    post.nsfw = false;
+    post.ownerId = 1;
+
     return this.http.post('/api/posts', post);
   }
 
@@ -16,7 +22,15 @@ export class PostService {
     return this.http.get('/api/posts');
   }
 
-  getById(id: any): Observable<any> {
-    return this.http.get('/api/posts/' + id);
+  getAllWithComments(): Observable<any> {
+    return this.http.get('/api/posts?_embed=comments');
+  }
+
+  getById(id: number): Observable<any> {
+    return this.http.get(`/api/posts/${id}`);
+  }
+
+  getByIdWithComments(id: number): Observable<any> {
+    return this.http.get(`/api/posts/${id}?_embed=comments`);
   }
 }

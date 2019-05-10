@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PostsComponent } from './components/posts/posts.component';
-import { NewPostComponent } from './components/new-post/new-post.component';
-import { ViewPostComponent } from './components/view-post/view-post.component';
+import { PostsComponent } from './containers/posts/posts.component';
+import { NewPostComponent } from './containers/new-post/new-post.component';
+import { ViewPostComponent } from './containers/view-post/view-post.component';
 
 const routes: Routes = [
   { path: 'new', component: NewPostComponent },

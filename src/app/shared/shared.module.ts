@@ -11,7 +11,8 @@ import {
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
-import { FileUploaderDirective } from '../shared/components/file-uploader/file-uploader.component';
+import { FileUploaderDirective } from './directives/file-uploader/file-uploader.directive';
+import { OverflowClassDirective } from './directives/overflow-class/overflow-class.directive';
 
 const MODULES = [
   CommonModule,
@@ -26,8 +27,8 @@ const MODULES = [
 ];
 
 @NgModule({
-  declarations: [FileUploaderDirective],
+  declarations: [FileUploaderDirective, OverflowClassDirective],
   imports: MODULES,
-  exports: [...MODULES, FileUploaderDirective]
+  exports: [...MODULES, FileUploaderDirective, OverflowClassDirective]
 })
 export class SharedModule {}

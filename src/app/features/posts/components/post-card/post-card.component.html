@@ -1,6 +1,11 @@
-<mat-card class="post-card">
+<mat-card>
   <mat-card-title>
     {{ title }}
   </mat-card-title>
-  <img mat-card-image *ngIf="url" [src]="url" [routerLink]="['/posts', id]" />
+  <img
+    mat-card-image
+    *ngIf="url"
+    [src]="url"
+    [routerLink]="['/posts', postId]"
+  />
 </mat-card>

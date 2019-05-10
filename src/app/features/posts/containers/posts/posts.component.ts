@@ -13,7 +13,7 @@ export class PostsComponent implements AfterViewInit {
 
   posts: any = this.fetchPosts
     .asObservable()
-    .pipe(switchMap(() => this.postService.getAll()));
+    .pipe(switchMap(() => this.postService.getAllWithComments()));
 
   constructor(private readonly postService: PostService) {}
 

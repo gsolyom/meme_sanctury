@@ -1,9 +1,12 @@
-.post-card {
-  margin-bottom: 16px;
-  max-width: calc(66% - 16px);
+:host {
+  display: flex;
 
-  img {
-    height: 500px;
-    object-fit: cover;
+  mat-card {
+    flex: 1;
+
+    img {
+      object-fit: cover;
+      height: 500px;
+    }
   }
 }
