@@ -1,17 +1,20 @@
 import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 import {
   switchMap,
   debounceTime,
   withLatestFrom,
   pluck,
-  startWith
+  startWith,
+  map
 } from 'rxjs/operators';
 
 import { PostService } from '../../services/post.service';
 import { fadeAnimation } from '@shared/animations';
 import { CommentService } from '../../services/comment.service';
 import { NewCommentComponent } from '../../components/new-comment/new-comment.component';
+import { CommentReplyService } from '../../services/comment-reply.service';
 
 @Component({
   selector: 'msct-view-post',
@@ -25,12 +28,29 @@ export class ViewPostComponent {
 
   fetchComments = new EventEmitter<number>();
   addCommentEmitter = new EventEmitter<any>();
+  addReplyEmitter = new EventEmitter<{
+    reply: any;
+    comment: any;
+    component: NewCommentComponent;
+  }>();
+
   showFullSizeImage = false;
 
   comments: any = this.fetchComments.asObservable().pipe(
     startWith(''),
     switchMap(() => this.route.params.pipe(pluck('postId'))),
-    switchMap(postId => this.commentService.getByPostId(+postId, 1, 100))
+    switchMap(postId =>
+      this.commentService.getByPostIdWithReplies(+postId, 1, 100).pipe(
+        map(comments => {
+          comments.forEach(element => {
+            element.showReplies = false;
+            element.replyCount = element.commentReplies.length;
+          });
+
+          return comments;
+        })
+      )
+    )
   );
   post: any = this.route.params.pipe(
     switchMap(({ postId }) => this.postService.getById(postId))
@@ -39,6 +59,7 @@ export class ViewPostComponent {
   constructor(
     private readonly postService: PostService,
     private readonly commentService: CommentService,
+    private readonly commentReplyService: CommentReplyService,
     private route: ActivatedRoute
   ) {
     window.scroll(0, 0);
@@ -56,13 +77,44 @@ export class ViewPostComponent {
         this.newComment.reset();
         this.fetchComments.emit();
       });
-  }
 
+    this.addReplyEmitter
+      .asObservable()
+      .pipe(
+        debounceTime(500),
+        switchMap(({ reply, comment, component }) => {
+          const addReplyRequest = this.commentReplyService.add(reply);
+
+          return of({ addReplyRequest, comment, component });
+        })
+      )
+      .subscribe(bundle => {
+        bundle.addReplyRequest.subscribe(() => {
+          bundle.component.reset();
+          this.commentReplyService
+            .getByCommentId(bundle.comment.id)
+            .subscribe(replies => (bundle.comment.commentReplies = replies));
+        });
+      });
+  }
+  ks;
   addComment(comment: any): void {
     this.addCommentEmitter.emit(comment);
   }
 
+  addReply(reply: any, comment: any, component: NewCommentComponent): void {
+    this.addReplyEmitter.emit({
+      reply: { ...reply, commentId: comment.id },
+      comment,
+      component
+    });
+  }
+
   toggleFullSizeImage(): void {
     this.showFullSizeImage = !this.showFullSizeImage;
+  }
+
+  toggleReplies(comment: any): void {
+    comment.showReplies = !comment.showReplies;
   }
 }
