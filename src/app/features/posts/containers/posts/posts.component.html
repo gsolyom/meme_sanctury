@@ -13,6 +13,13 @@
       [postId]="post.id"
       class="post-card"
     >
+      <msct-reactions
+        [favoriteCount]="post.postReactions[0]"
+        [happyCount]="post.postReactions[1]"
+        [disappointedCount]="post.postReactions[2]"
+        [sadCount]="post.postReactions[3]"
+        (reactionSubmitted)="addReaction($event, post)"
+      ></msct-reactions>
     </msct-post-card>
     <msct-comments-preview
       [comments]="post.comments"

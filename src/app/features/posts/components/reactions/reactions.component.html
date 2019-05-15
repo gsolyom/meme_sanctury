@@ -1,0 +1,54 @@
+<div class="post-action-bar">
+  <ng-container *ngIf="favoriteCount">
+    <mat-icon class="reaction-counter">favorite_border_outlined</mat-icon>
+    <span>{{ favoriteCount }}</span>
+  </ng-container>
+  <ng-container *ngIf="happyCount">
+    <mat-icon class="reaction-counter"
+      >sentiment_very_satisfied_outlined</mat-icon
+    >
+    <span>{{ happyCount }}</span>
+  </ng-container>
+  <ng-container *ngIf="disappointedCount">
+    <mat-icon class="reaction-counter"
+      >sentiment_dissatisfied_outlined</mat-icon
+    >
+    <span>{{ disappointedCount }}</span>
+  </ng-container>
+  <ng-container *ngIf="sadCount">
+    <mat-icon class="reaction-counter"
+      >sentiment_very_dissatisfied_outlined</mat-icon
+    >
+    <span>{{ sadCount }}</span>
+  </ng-container>
+  <div class="msct-flex-fill"></div>
+  <div *ngIf="showReactionBar">
+    <button mat-raised-button (click)="addReaction(reactionTypes.favorite)">
+      <mat-icon>favorite_border_outlined</mat-icon>
+    </button>
+
+    <button mat-raised-button (click)="addReaction(reactionTypes.happy)">
+      <mat-icon>sentiment_very_satisfied_outlined</mat-icon>
+    </button>
+
+    <button mat-raised-button (click)="addReaction(reactionTypes.disappointed)">
+      <mat-icon>sentiment_dissatisfied_outlined</mat-icon>
+    </button>
+
+    <button mat-raised-button (click)="addReaction(reactionTypes.sad)">
+      <mat-icon>sentiment_very_dissatisfied_outlined</mat-icon>
+    </button>
+  </div>
+  <ng-container [ngSwitch]="showReactionBar">
+    <button
+      mat-raised-button
+      *ngSwitchCase="true"
+      (click)="toggleReactionBar()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-raised-button *ngSwitchDefault (click)="toggleReactionBar()">
+      React
+    </button>
+  </ng-container>
+</div>

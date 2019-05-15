@@ -26,8 +26,16 @@ export class PostService {
     return this.http.get('/api/posts?_embed=comments');
   }
 
+  getAllWithCommentsAndReactions(): Observable<any> {
+    return this.http.get('/api/posts?_embed=comments&_embed=postReactions');
+  }
+
   getById(id: number): Observable<any> {
     return this.http.get(`/api/posts/${id}`);
+  }
+
+  getByIdWithReactions(id: number): Observable<any> {
+    return this.http.get(`/api/posts/${id}?_embed=postReactions`);
   }
 
   getByIdWithComments(id: number): Observable<any> {

@@ -1,0 +1,19 @@
+.post-action-bar {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+
+  button {
+    margin-right: 8px;
+
+    span {
+      padding-left: 8px;
+    }
+  }
+
+  .reaction-counter {
+    margin-left: 8px;
+  }
+}
