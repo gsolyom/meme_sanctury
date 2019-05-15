@@ -1,6 +1,6 @@
 import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
+import { of, from } from 'rxjs';
 import {
   switchMap,
   debounceTime,
