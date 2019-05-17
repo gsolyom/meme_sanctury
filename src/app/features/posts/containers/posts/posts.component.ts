@@ -1,15 +1,9 @@
 import { Component, EventEmitter, AfterViewInit } from '@angular/core';
-import {
-  switchMap,
-  debounceTime,
-  withLatestFrom,
-  pluck,
-  tap
-} from 'rxjs/operators';
+import { switchMap, debounceTime, tap, startWith, pluck } from 'rxjs/operators';
 
 import { PostService } from '../../services/post.service';
 import { PostReactionService } from '../../services/post-reaction.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { reactionTypes } from '../../constants';
 
 @Component({
@@ -18,12 +12,22 @@ import { reactionTypes } from '../../constants';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements AfterViewInit {
-  fetchPosts = new EventEmitter();
+  fetchPosts = new EventEmitter<string>();
 
   addPostReactionEmitter = new EventEmitter<{ value: any; post: any }>();
 
   posts: any = this.fetchPosts.asObservable().pipe(
-    switchMap(() => this.postService.getAllWithCommentsAndReactions()),
+    switchMap(filterValue => {
+      if (filterValue && filterValue + '' !== '') {
+        const filterString = filterValue + '';
+
+        return this.postService.getAllFilteredWithCommentsAndReactions(
+          filterString
+        );
+      }
+
+      return this.postService.getAllWithCommentsAndReactions();
+    }),
     tap(posts => {
       posts.forEach(post => {
         post.postReactions = this.countReactions(post.postReactions);
@@ -40,7 +44,9 @@ export class PostsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.fetchPosts.emit();
+    this.route.queryParams.subscribe(params => {
+      this.fetchPosts.emit(params.filter);
+    });
   }
 
   addReaction(reaction: string, post: any): void {
