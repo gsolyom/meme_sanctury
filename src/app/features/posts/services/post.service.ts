@@ -30,6 +30,16 @@ export class PostService {
     return this.http.get('/api/posts?_embed=comments&_embed=postReactions');
   }
 
+  getAllFilteredWithCommentsAndReactions(
+    filterString: string = ''
+  ): Observable<any> {
+    const filter = filterString === '' ? '' : '&title_like=' + filterString;
+
+    return this.http.get(
+      `/api/posts?_embed=comments&_embed=postReactions${filter}`
+    );
+  }
+
   getById(id: number): Observable<any> {
     return this.http.get(`/api/posts/${id}`);
   }
