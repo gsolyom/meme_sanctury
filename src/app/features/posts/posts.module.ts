@@ -7,11 +7,12 @@ import { PostService } from './services/post.service';
 import { PostCardComponent } from './components/post-card/post-card.component';
 import { NewPostComponent } from './containers/new-post/new-post.component';
 import { ViewPostComponent } from './containers/view-post/view-post.component';
-import { CommentsComponent } from './components/comments/comments.component';
+import { CommentComponent } from './components/comment/comment.component';
 import { CommentsPreviewComponent } from './components/comments-preview/comments-preview.component';
 import { CommentService } from './services/comment.service';
 import { FullSizeImageDisplayComponent } from '../../shared/components/full-size-image-display/full-size-image-display.component';
 import { NewCommentComponent } from './components/new-comment/new-comment.component';
+import { CommentReplyService } from './services/comment-reply.service';
 
 @NgModule({
   declarations: [
@@ -19,12 +20,12 @@ import { NewCommentComponent } from './components/new-comment/new-comment.compon
     PostCardComponent,
     NewPostComponent,
     ViewPostComponent,
-    CommentsComponent,
+    CommentComponent,
     CommentsPreviewComponent,
     FullSizeImageDisplayComponent,
     NewCommentComponent
   ],
   imports: [SharedModule, PostsRoutingModule],
-  providers: [PostService, CommentService]
+  providers: [PostService, CommentService, CommentReplyService]
 })
 export class PostsModule {}

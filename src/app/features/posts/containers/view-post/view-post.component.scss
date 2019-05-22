@@ -33,3 +33,20 @@
     width: 100%;
   }
 }
+
+.comment-container {
+  margin-bottom: 16px;
+  white-space: pre;
+}
+
+.replies-container {
+  margin-left: 16px;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+
+  .reply-container {
+    margin-bottom: 16px;
+    white-space: pre;
+  }
+}

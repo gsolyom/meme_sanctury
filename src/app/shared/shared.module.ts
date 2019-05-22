@@ -7,7 +7,8 @@ import {
   MatIconModule,
   MatCardModule,
   MatToolbarModule,
-  MatDividerModule
+  MatDividerModule,
+  MatExpansionModule
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
@@ -23,6 +24,7 @@ const MODULES = [
   MatCardModule,
   MatToolbarModule,
   MatDividerModule,
+  MatExpansionModule,
   FormsModule
 ];
 

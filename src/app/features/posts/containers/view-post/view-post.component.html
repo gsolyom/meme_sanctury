@@ -21,9 +21,50 @@
       </div>
       <div *ngIf="comments | async as comments" class="comment-list-container">
         <msct-new-comment
+          [textareaRowMin]="3"
+          [textareaRowMax]="3"
           (newCommentSubmitted)="addComment($event)"
         ></msct-new-comment>
-        <msct-comments [comments]="comments"></msct-comments>
+
+        <div *ngFor="let comment of comments" class="comment-container">
+          <msct-comment [comment]="comment"> </msct-comment>
+
+          <button mat-button (click)="toggleReplies(comment)">
+            <ng-container *ngIf="comment.replyCount > 0">
+              {{ comment.replyCount }} Replies
+              <mat-icon *ngIf="!comment.showReplies"
+                >keyboard_arrow_down</mat-icon
+              >
+              <mat-icon *ngIf="comment.showReplies">keyboard_arrow_up</mat-icon>
+            </ng-container>
+            <ng-container *ngIf="comment.replyCount <= 0">
+              Reply
+            </ng-container>
+          </button>
+
+          <div *ngIf="comment.showReplies" class="replies-container">
+            <div
+              *ngFor="let reply of comment.commentReplies"
+              class="reply-container"
+            >
+              <msct-comment [comment]="reply"></msct-comment>
+            </div>
+            <msct-new-comment
+              #currentComponent="msctNewComment"
+              [textareaRowMin]="1"
+              [textareaRowMax]="2"
+              (newCommentSubmitted)="
+                addReply($event, comment, currentComponent)
+              "
+            ></msct-new-comment>
+          </div>
+        </div>
+
+        <div *ngIf="!comments.length" class="comment-container">
+          <p>
+            No comments were added yet...
+          </p>
+        </div>
       </div>
     </div>
 

@@ -50,3 +50,14 @@ body {
 .msct-flex-fill {
   flex: 1 auto;
 }
+
+.msct-bright-textarea-field {
+  .mat-form-field-outline {
+    background-color: whitesmoke !important;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: whitesmoke !important;
+    }
+  }
+}
