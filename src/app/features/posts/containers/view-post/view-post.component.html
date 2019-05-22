@@ -18,6 +18,14 @@
           overflow="height"
           threshold="800"
         />
+
+        <msct-reactions
+          [favoriteCount]="post.postReactions[0]"
+          [happyCount]="post.postReactions[1]"
+          [disappointedCount]="post.postReactions[2]"
+          [sadCount]="post.postReactions[3]"
+          (reactionSubmitted)="addReaction($event, post)"
+        ></msct-reactions>
       </div>
       <div *ngIf="comments | async as comments" class="comment-list-container">
         <msct-new-comment

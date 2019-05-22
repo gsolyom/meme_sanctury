@@ -13,6 +13,8 @@ import { CommentService } from './services/comment.service';
 import { FullSizeImageDisplayComponent } from '../../shared/components/full-size-image-display/full-size-image-display.component';
 import { NewCommentComponent } from './components/new-comment/new-comment.component';
 import { CommentReplyService } from './services/comment-reply.service';
+import { PostReactionService } from './services/post-reaction.service';
+import { ReactionsComponent } from './components/reactions/reactions.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,15 @@ import { CommentReplyService } from './services/comment-reply.service';
     CommentComponent,
     CommentsPreviewComponent,
     FullSizeImageDisplayComponent,
-    NewCommentComponent
+    NewCommentComponent,
+    ReactionsComponent
   ],
   imports: [SharedModule, PostsRoutingModule],
-  providers: [PostService, CommentService, CommentReplyService]
+  providers: [
+    PostService,
+    CommentService,
+    CommentReplyService,
+    PostReactionService
+  ]
 })
 export class PostsModule {}
