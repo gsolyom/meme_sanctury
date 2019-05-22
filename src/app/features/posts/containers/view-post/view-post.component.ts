@@ -7,7 +7,7 @@ import {
   withLatestFrom,
   pluck,
   startWith,
-  map
+  tap
 } from 'rxjs/operators';
 
 import { PostService } from '../../services/post.service';
@@ -40,17 +40,14 @@ export class ViewPostComponent {
     startWith(''),
     switchMap(() => this.route.params.pipe(pluck('postId'))),
     switchMap(postId =>
-      this.commentService.getByPostIdWithReplies(+postId, 1, 100).pipe(
-        map(comments => {
-          comments.forEach(element => {
-            element.showReplies = false;
-            element.replyCount = element.commentReplies.length;
-          });
-
-          return comments;
-        })
-      )
-    )
+      this.commentService.getByPostIdWithReplies(+postId, 1, 100)
+    ),
+    tap(comments => {
+      comments.forEach(comment => {
+        comment.showReplies = false;
+        comment.replyCount = comment.commentReplies.length;
+      });
+    })
   );
   post: any = this.route.params.pipe(
     switchMap(({ postId }) => this.postService.getById(postId))
@@ -92,12 +89,12 @@ export class ViewPostComponent {
         bundle.addReplyRequest.subscribe(() => {
           bundle.component.reset();
           this.commentReplyService
-            .getByCommentId(bundle.comment.id)
+            .getByCommentId(bundle.comment.id, 1, 100)
             .subscribe(replies => (bundle.comment.commentReplies = replies));
         });
       });
   }
-  ks;
+
   addComment(comment: any): void {
     this.addCommentEmitter.emit(comment);
   }
