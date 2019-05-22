@@ -42,12 +42,18 @@
   <ng-container [ngSwitch]="showReactionBar">
     <button
       mat-raised-button
+      color="accent"
       *ngSwitchCase="true"
       (click)="toggleReactionBar()"
     >
       <mat-icon>close</mat-icon>
     </button>
-    <button mat-raised-button *ngSwitchDefault (click)="toggleReactionBar()">
+    <button
+      mat-raised-button
+      color="accent"
+      *ngSwitchDefault
+      (click)="toggleReactionBar()"
+    >
       React
     </button>
   </ng-container>

@@ -36,4 +36,14 @@ export class CommentService {
 
     return this.http.get(query);
   }
+
+  getByPostIdWithRepliesAndReactions(
+    postId: number,
+    pageNumber: number = null,
+    pageLimit: number = 10
+  ): Observable<any> {
+    const query = `/api/posts/${postId}/comments&replies&reactions/${pageNumber},${pageLimit}`;
+
+    return this.http.get(query);
+  }
 }

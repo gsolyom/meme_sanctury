@@ -17,6 +17,7 @@ import { NewCommentComponent } from '../../components/new-comment/new-comment.co
 import { CommentReplyService } from '../../services/comment-reply.service';
 import { PostReactionService } from '../../services/post-reaction.service';
 import { reactionTypes } from '../../constants';
+import { CommentReactionService } from '../../services/comment-reaction.service';
 
 @Component({
   selector: 'msct-view-post',
@@ -30,6 +31,7 @@ export class ViewPostComponent {
 
   fetchComments = new EventEmitter<number>();
   addPostReactionEmitter = new EventEmitter<{ value: any; post: any }>();
+  addCommentReactionEmitter = new EventEmitter<{ value: any; comment: any }>();
   addCommentEmitter = new EventEmitter<any>();
   addReplyEmitter = new EventEmitter<{
     reply: any;
@@ -43,12 +45,15 @@ export class ViewPostComponent {
     startWith(''),
     switchMap(() => this.route.params.pipe(pluck('postId'))),
     switchMap(postId =>
-      this.commentService.getByPostIdWithReplies(+postId, 1, 100)
+      this.commentService.getByPostIdWithRepliesAndReactions(+postId, 1, 100)
     ),
     tap(comments => {
       comments.forEach(comment => {
         comment.showReplies = false;
         comment.replyCount = comment.commentReplies.length;
+        comment.commentReactions = this.countReactions(
+          comment.commentReactions
+        );
       });
     })
   );
@@ -64,17 +69,23 @@ export class ViewPostComponent {
     private readonly commentService: CommentService,
     private readonly commentReplyService: CommentReplyService,
     private readonly postReactionService: PostReactionService,
+    private readonly commentReactionService: CommentReactionService,
     private route: ActivatedRoute
   ) {
     this.configureAddCommentEmitter();
     this.configureAddReplyEmitter();
     this.configureAddPostReactionEmitter();
+    this.configureAddCommentReactionEmitter();
 
     window.scroll(0, 0);
   }
 
-  addReaction(reaction: string, post: any): void {
+  addPostReaction(reaction: string, post: any): void {
     this.addPostReactionEmitter.emit({ value: { type: reaction }, post });
+  }
+
+  addCommentReaction(reaction: string, comment: any): void {
+    this.addCommentReactionEmitter.emit({ value: { type: reaction }, comment });
   }
 
   addComment(comment: any): void {
@@ -197,5 +208,24 @@ export class ViewPostComponent {
     //       })
     //   );
     // });
+  }
+
+  private configureAddCommentReactionEmitter(): void {
+    this.addCommentReactionEmitter
+      .asObservable()
+      .pipe(
+        debounceTime(300),
+        switchMap(({ value, comment }) => {
+          const request = this.commentReactionService.add({
+            ...value,
+            commentId: +comment.id
+          });
+
+          this.mapReactionType(value.type, comment.commentReactions);
+
+          return request;
+        })
+      )
+      .subscribe();
   }
 }

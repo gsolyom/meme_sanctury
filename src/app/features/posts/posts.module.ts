@@ -15,6 +15,7 @@ import { NewCommentComponent } from './components/new-comment/new-comment.compon
 import { CommentReplyService } from './services/comment-reply.service';
 import { PostReactionService } from './services/post-reaction.service';
 import { ReactionsComponent } from './components/reactions/reactions.component';
+import { CommentReactionService } from './services/comment-reaction.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ReactionsComponent } from './components/reactions/reactions.component';
     PostService,
     CommentService,
     CommentReplyService,
-    PostReactionService
+    PostReactionService,
+    CommentReactionService
   ]
 })
 export class PostsModule {}
